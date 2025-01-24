@@ -10,12 +10,13 @@
 //arquivo .pio
 #include "pio_matrix.pio.h"
 
-//número de LEDs
 #define NUM_PIXELS 25
 
-//pino de saída
+//pino do led 5xr
 #define OUT_PIN 7
 
+extern void pico_keypad_init(void);
+extern char pico_keypad_get_key(void);
 
 //vetor para criar imagem na matriz de led - 1
 double desenho[25] =   {0.0, 0.3, 0.3, 0.3, 0.0,
@@ -77,8 +78,9 @@ int main()
 
     //coloca a frequência de clock para 128 MHz, facilitando a divisão pelo clock
     ok = set_sys_clock_khz(128000, false);
-
+    pico_keypad_init();
     stdio_init_all();
+    char last_key = 0;
 
     printf("iniciando a transmissão PIO");
     if (ok) printf("clock set to %ld\n", clock_get_hz(clk_sys));

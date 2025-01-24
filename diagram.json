@@ -44,7 +44,14 @@
     { "type": "wokwi-gnd", "id": "gnd4", "top": -172.8, "left": -384.6, "attrs": {} },
     { "type": "wokwi-vcc", "id": "vcc4", "top": -277.64, "left": -384, "attrs": {} },
     { "type": "wokwi-vcc", "id": "vcc5", "top": -364.04, "left": -48, "attrs": {} },
-    { "type": "wokwi-gnd", "id": "gnd5", "top": -268.8, "left": -48.6, "attrs": {} }
+    { "type": "wokwi-gnd", "id": "gnd5", "top": -268.8, "left": -48.6, "attrs": {} },
+    {
+      "type": "wokwi-membrane-keypad",
+      "id": "keypad1",
+      "top": -366.8,
+      "left": 159.2,
+      "attrs": {}
+    }
   ],
   "connections": [
     [ "pico:GP0", "$serialMonitor:RX", "", [] ],
@@ -133,7 +140,15 @@
     [ "rgb22:VSS", "gnd5:GND", "green", [ "v0" ] ],
     [ "rgb23:VSS", "gnd5:GND", "green", [ "v0" ] ],
     [ "rgb24:VSS", "gnd5:GND", "green", [ "v0" ] ],
-    [ "rgb25:VSS", "gnd5:GND", "green", [ "v0" ] ]
+    [ "rgb25:VSS", "gnd5:GND", "green", [ "v0" ] ],
+    [ "keypad1:R1", "pico:GP16", "green", [ "v0" ] ],
+    [ "keypad1:R2", "pico:GP17", "green", [ "v0" ] ],
+    [ "keypad1:R3", "pico:GP18", "green", [ "v0" ] ],
+    [ "keypad1:R4", "pico:GP19", "green", [ "v0" ] ],
+    [ "keypad1:C1", "pico:GP20", "green", [ "v0" ] ],
+    [ "keypad1:C2", "pico:GP21", "green", [ "v0" ] ],
+    [ "keypad1:C3", "pico:GP22", "green", [ "v0" ] ],
+    [ "keypad1:C4", "pico:GP26", "green", [ "v0" ] ]
   ],
   "dependencies": {}
 }
