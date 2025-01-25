@@ -167,43 +167,43 @@ void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int d
 {
 
     double frames[5][25] = {
-        {0.0, 1.0, 0.0, 1.0, 0.0, 
+        {0.0, 1.0, 0.0, 1.0, 0.0,
          1.0, 0.0, 1.0, 0.0, 1.0,
          1.0, 0.0, 0.0, 0.0, 1.0,
          0.0, 1.0, 0.0, 1.0, 0.0,
          0.0, 0.0, 1.0, 0.0, 0.0},
 
-        {0.0, 1.0, 0.0, 1.0, 0.0, 
+        {0.0, 1.0, 0.0, 1.0, 0.0,
          1.0, 0.0, 1.0, 0.0, 1.0,
          1.0, 0.0, 0.5, 0.0, 1.0,
          0.0, 1.0, 0.0, 1.0, 0.0,
          0.0, 0.0, 1.0, 0.0, 0.0},
 
-        {0.0, 1.0, 0.0, 1.0, 0.0, 
+        {0.0, 1.0, 0.0, 1.0, 0.0,
          1.0, 0.0, 1.0, 0.0, 1.0,
          1.0, 0.5, 0.5, 0.5, 1.0,
          0.0, 1.0, 0.0, 1.0, 0.0,
          0.0, 0.0, 1.0, 0.0, 0.0},
 
-        {0.0, 1.0, 0.0, 1.0, 0.0, 
+        {0.0, 1.0, 0.0, 1.0, 0.0,
          1.0, 0.0, 1.0, 0.0, 1.0,
          1.0, 1.0, 1.0, 1.0, 1.0,
          0.0, 1.0, 0.0, 1.0, 0.0,
          0.0, 0.0, 1.0, 0.0, 0.0},
 
-        {0.0, 1.0, 0.0, 1.0, 0.0, 
+        {0.0, 1.0, 0.0, 1.0, 0.0,
          1.0, 1.0, 1.0, 1.0, 1.0,
          1.0, 1.0, 1.0, 1.0, 1.0,
          0.0, 1.0, 1.0, 1.0, 0.0,
          0.0, 0.0, 1.0, 0.0, 0.0}};
 
-    for (int rep = 0; rep < repeticoes; rep++) 
+    for (int rep = 0; rep < repeticoes; rep++)
     {
         for (int f = 0; f < 5; f++)
         {
             for (double brilho = 0.2; brilho <= 1.0; brilho += 0.2) // AUMENTA o brilho
             {
-                for (int16_t i = 0; i < NUM_PIXELS; i++) 
+                for (int16_t i = 0; i < NUM_PIXELS; i++)
                 {
                     double intensidade = frames[f][24 - i] * brilho;
                     valor_led = matrix_rgb(0, intensidade, 0);
@@ -215,8 +215,8 @@ void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int d
             for (double brilho = 1.0; brilho >= 0.2; brilho -= 0.2) // DIMINUI o brilho
             {
                 for (int16_t i = 0; i < NUM_PIXELS; i++)
-                { 
-                    double intensidade = frames[f][24 - i] * brilho; 
+                {
+                    double intensidade = frames[f][24 - i] * brilho;
                     valor_led = matrix_rgb(0, intensidade, 0);
                     pio_sm_put_blocking(pio, sm, valor_led);
                 }
