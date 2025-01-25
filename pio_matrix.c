@@ -18,6 +18,7 @@
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
 extern void animacao_olho(PIO pio, uint sm);
+void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 
 // todos os LEDs deverão ser ligados na cor branca, no nível de intensidade de 20% da luminosidade máxima.
 double leds_brancos[25] = {0.2, 0.2, 0.2, 0.2, 0.2,
@@ -157,6 +158,12 @@ int main()
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             desenho_pio(NULL, valor_led, pio, sm, 0.0, 0.0, 1.0, caracter_press); // Chamada para acender LEDs azuis
+        }
+        else if (caracter_press == '1' && caracter_press != last_key) // Se caso para tecla 'B'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            coracao_batendo(valor_led, pio, sm, 3, 150);
         }
 
         else if (caracter_press == '2' && caracter_press != last_key) // Se caso para tecla 'B'
