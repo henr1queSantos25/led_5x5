@@ -18,7 +18,7 @@
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
 
-//FUNÇÕES DAS ANIMAÇÕES
+// FUNÇÕES DAS ANIMAÇÕES
 extern void animacao_olho(PIO pio, uint sm);
 extern void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 extern void tetrix(PIO pio, uint sm);
@@ -82,6 +82,12 @@ void desenho_pio(uint32_t valor_led, PIO pio, uint sm, char caracter_press)
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
+}
+
+// Função para reboot
+void reboot()
+{
+    reset_usb_boot(0, 0);
 }
 
 int main()
@@ -171,6 +177,12 @@ int main()
         {
             last_key = caracter_press;
             printf("\nTecla pressionada: %c\n", caracter_press);
+        }
+        else if (caracter_press == '*' && caracter_press != last_key)
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            reboot_device();
         }
 
         sleep_ms(500);
