@@ -17,6 +17,7 @@
 
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
+extern void animacao_olho(PIO pio, uint sm);
 
 // todos os LEDs deverão ser ligados na cor branca, no nível de intensidade de 20% da luminosidade máxima.
 double leds_brancos[25] = {0.2, 0.2, 0.2, 0.2, 0.2,

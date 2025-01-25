@@ -18,6 +18,7 @@
 
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
+extern uint32_t matrix_rgb(double b, double r, double g);
 
 // Função para criar a animação de um olho
 void animacao_olho(PIO pio, uint sm)
