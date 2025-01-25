@@ -7,6 +7,7 @@
 #include "hardware/adc.h"
 #include "pico/bootrom.h"
 
+
 // arquivo .pio
 #include "pio_matrix.pio.h"
 
@@ -155,6 +156,13 @@ int main()
             last_key = caracter_press;
             desenho_pio(NULL, valor_led, pio, sm, 0.0, 0.0, 1.0, caracter_press); // Chamada para acender LEDs azuis
         }
+
+        else if (caracter_press == '2' && caracter_press != last_key) // Se caso para tecla 'B'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            animacao_olho(pio, sm); // Chamada para acender LEDs azuis
+
         else if (caracter_press == 'D' && caracter_press != last_key) 
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
