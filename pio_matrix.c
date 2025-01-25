@@ -18,6 +18,7 @@
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
 extern void animacao_olho(PIO pio, uint sm);
+extern void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 
 // todos os LEDs deverão ser ligados na cor branca, no nível de intensidade de 20% da luminosidade máxima.
 double leds_brancos[25] = {0.2, 0.2, 0.2, 0.2, 0.2,
@@ -33,12 +34,6 @@ double leds_apagados[25] = {0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0,
                             0, 0, 0, 0, 0};
 
-// vetor para criar imagem na matriz de led - 2
-double desenho2[25] = {1.0, 0.0, 0.0, 0.0, 1.0,
-                       0.0, 1.0, 0.0, 1.0, 0.0,
-                       0.0, 0.0, 1.0, 0.0, 0.0,
-                       0.0, 1.0, 0.0, 1.0, 0.0,
-                       1.0, 0.0, 0.0, 0.0, 1.0};
 
 // imprimir valor binário
 void imprimir_binario(int num)
@@ -63,7 +58,7 @@ uint32_t matrix_rgb(double b, double r, double g)
 // rotina para acionar a matrix de leds - ws2812b
 void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r, double g, double b, char caracter_press)
 {
-    if (caracter_press == '#')
+    if (caracter_press == 'A')
     {
         for (int16_t i = 0; i < NUM_PIXELS; i++)
         {
@@ -71,19 +66,22 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
+
+    else if (caracter_press == 'B') // Novo caso para tecla 'B'
+    {
+
+        for (int16_t i = 0; i < NUM_PIXELS; i++)
+        {
+            valor_led = matrix_rgb(1.0, 0.0, 0.0); // LEDs na cor azul com 100% de intensidade
+            pio_sm_put_blocking(pio, sm, valor_led);
+        }
+    }
+
     else if (caracter_press == 'C') // Caso para tecla 'C'
     {
         for (int16_t i = 0; i < NUM_PIXELS; i++)
         {
             valor_led = matrix_rgb(0.0, 0.8, 0.0); // LEDs na cor verde com 80% de intensidade
-            pio_sm_put_blocking(pio, sm, valor_led);
-        }
-    }
-    else if (caracter_press == 'A')
-    {
-        for (int16_t i = 0; i < NUM_PIXELS; i++)
-        {
-            valor_led = matrix_rgb(desenho[24 - i], desenho[24 - i], desenho[24 - i]);
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
@@ -96,12 +94,12 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
-    else if (caracter_press == 'B') // Novo caso para tecla 'B'
-    {
 
+    else if (caracter_press == '#')
+    {
         for (int16_t i = 0; i < NUM_PIXELS; i++)
         {
-            valor_led = matrix_rgb(1.0, 0.0, 0.0); // LEDs na cor azul com 100% de intensidade
+            valor_led = matrix_rgb(desenho[24 - i], desenho[24 - i], desenho[24 - i]);
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
@@ -134,29 +132,39 @@ int main()
     {
         char caracter_press = pico_keypad_get_key();
 
-        if (caracter_press == '#' && caracter_press != last_key)
+        if (caracter_press == 'A' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
-            desenho_pio(leds_brancos, valor_led, pio, sm, r, g, b, caracter_press);
+            desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press);
         }
+
+        else if (caracter_press == 'B' && caracter_press != last_key) // Se caso para tecla 'B'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            desenho_pio(NULL, valor_led, pio, sm, 0.0, 0.0, 1.0, caracter_press); // Chamada para acender LEDs azuis
+        }
+
         else if (caracter_press == 'C' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             desenho_pio(NULL, valor_led, pio, sm, 0.8, 0.0, 0.0, caracter_press);
         }
-        else if (caracter_press == 'A' && caracter_press != last_key)
+
+        else if (caracter_press == 'D' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press);
         }
-        else if (caracter_press == 'B' && caracter_press != last_key) // Se caso para tecla 'B'
+
+        else if (caracter_press == '1' && caracter_press != last_key) // Se caso para tecla 'B'
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
-            desenho_pio(NULL, valor_led, pio, sm, 0.0, 0.0, 1.0, caracter_press); // Chamada para acender LEDs azuis
+            coracao_batendo(valor_led, pio, sm, 3, 150);
         }
 
         else if (caracter_press == '2' && caracter_press != last_key) // Se caso para tecla 'B'
@@ -165,12 +173,14 @@ int main()
             last_key = caracter_press;
             animacao_olho(pio, sm); // Chamada para acender LEDs azuis
         }
-        else if (caracter_press == 'D' && caracter_press != last_key)
+
+        else if (caracter_press == '#' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
-            desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press);
+            desenho_pio(leds_brancos, valor_led, pio, sm, r, g, b, caracter_press);
         }
+
         else if (!caracter_press)
         {
             last_key = 0;
