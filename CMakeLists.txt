@@ -33,8 +33,10 @@ project(pio_matrix C CXX ASM)
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
+
 # Adiconar bibliotecas aqui!!!!
 add_executable(pio_matrix pio_matrix.c keypad.c animations.c)
+
 
 pico_set_program_name(pio_matrix "pio_matrix")
 pico_set_program_version(pio_matrix "0.1")
