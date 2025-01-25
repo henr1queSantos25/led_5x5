@@ -70,12 +70,13 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
             valor_led = matrix_rgb(desenho[24 - i], desenho[24 - i], desenho[24 - i]);
             pio_sm_put_blocking(pio, sm, valor_led);
         }
-    } else if(caracter_press == 'A'){
+    }
+    else if (caracter_press == 'C') // Adição: Caso para tecla 'C'
+    {
         for (int16_t i = 0; i < NUM_PIXELS; i++)
         {
-
-            valor_led = matrix_rgb(desenho[24 - i], desenho[24 - i], desenho[24 - i]);
-            pio_sm_put_blocking(pio, sm, valor_led);
+          valor_led = matrix_rgb(0.0, 0.8, 0.0); // LEDs na cor vermelha com 80% de intensidade
+          pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
 }
@@ -113,11 +114,6 @@ int main()
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             desenho_pio(leds_brancos, valor_led, pio, sm, r, g, b, caracter_press);
-        }
-        else if(caracter_press == 'A' && caracter_press != last_key ){
-            printf("\nTecla pressionada: %c\n", caracter_press); 
-            last_key = caracter_press; 
-            desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press);
         }
         else if (!caracter_press)
         {
