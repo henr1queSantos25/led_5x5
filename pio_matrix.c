@@ -7,7 +7,6 @@
 #include "hardware/adc.h"
 #include "pico/bootrom.h"
 
-
 // arquivo .pio
 #include "pio_matrix.pio.h"
 
@@ -26,12 +25,12 @@ double leds_brancos[25] = {0.2, 0.2, 0.2, 0.2, 0.2,
                            0.2, 0.2, 0.2, 0.2, 0.2,
                            0.2, 0.2, 0.2, 0.2, 0.2};
 
-// configuração para apagar todos os leds com intensidade 0 
+// configuração para apagar todos os leds com intensidade 0
 double leds_apagados[25] = {0, 0, 0, 0, 0,
-                           0, 0, 0, 0, 0,
-                           0, 0, 0, 0, 0,
-                           0, 0, 0, 0, 0,
-                           0, 0, 0, 0, 0};
+                            0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0,
+                            0, 0, 0, 0, 0};
 
 // vetor para criar imagem na matriz de led - 2
 double desenho2[25] = {1.0, 0.0, 0.0, 0.0, 1.0,
@@ -88,10 +87,12 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
         }
     }
 
-    else if(caracter_press == 'D'){
-        for(int16_t i = 0; i< NUM_PIXELS; i++){
-            valor_led = matrix_rgb(0.0,0.0,0.5);
-            pio_sm_put_blocking(pio,sm,valor_led);
+    else if (caracter_press == 'D')
+    {
+        for (int16_t i = 0; i < NUM_PIXELS; i++)
+        {
+            valor_led = matrix_rgb(0.0, 0.0, 0.5);
+            pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
     else if (caracter_press == 'B') // Novo caso para tecla 'B'
@@ -162,12 +163,12 @@ int main()
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             animacao_olho(pio, sm); // Chamada para acender LEDs azuis
-
-        else if (caracter_press == 'D' && caracter_press != last_key) 
+        }
+        else if (caracter_press == 'D' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
-            desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press); 
+            desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press);
         }
         else if (!caracter_press)
         {
