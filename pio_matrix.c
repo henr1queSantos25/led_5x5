@@ -22,6 +22,7 @@ extern char pico_keypad_get_key(void);
 extern void animacao_olho(PIO pio, uint sm);
 extern void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 extern void tetrix(PIO pio, uint sm);
+extern void seta(PIO pio, uint sm);
 
 // rotina para definição da intensidade de cores do led
 uint32_t matrix_rgb(double b, double r, double g)
@@ -149,8 +150,12 @@ int main()
             last_key = caracter_press;
             tetrix(pio, sm); // função para gerar animação do leds
         }
-
-
+        else if (caracter_press == '4' && caracter_press != last_key) // Se caso para tecla '4'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            seta(pio, sm); // função para gerar animação do leds
+        }
         else if (caracter_press == '#' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
