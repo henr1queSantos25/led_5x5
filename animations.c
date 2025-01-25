@@ -227,7 +227,7 @@ void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int d
 }
 
 
-// ########################################### ANIMAÇÃO DE TETRIX#########################################
+// ########################################### ANIMAÇÃO DE TETRIX #########################################
 void tetrix(PIO pio, uint sm)
 {
     // Definição dos frames para simulação do tetrix
@@ -353,7 +353,7 @@ void tetrix(PIO pio, uint sm)
         sleep_ms(650); // Tempo entre os frames
     }
 }
-
+// ########################################### ANIMAÇÃO DE SETA #########################################
 void seta(PIO pio, uint sm){
     double frames [10][25] = {    
         {0.0, 0.0, 0.0, 0.0, 0.0,
