@@ -86,8 +86,16 @@ void desenho_pio(double *desenho, uint32_t valor_led, PIO pio, uint sm, double r
             pio_sm_put_blocking(pio, sm, valor_led);
         }
     }
+
+    else if(caracter_press == 'D'){
+        for(int16_t i = 0; i< NUM_PIXELS; i++){
+            valor_led = matrix_rgb(0.0,0.0,0.5);
+            pio_sm_put_blocking(pio,sm,valor_led);
+        }
+    }
     else if (caracter_press == 'B') // Novo caso para tecla 'B'
     {
+
         for (int16_t i = 0; i < NUM_PIXELS; i++)
         {
             valor_led = matrix_rgb(1.0, 0.0, 0.0); // LEDs na cor azul com 100% de intensidade
@@ -146,6 +154,12 @@ int main()
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             desenho_pio(NULL, valor_led, pio, sm, 0.0, 0.0, 1.0, caracter_press); // Chamada para acender LEDs azuis
+        }
+        else if (caracter_press == 'D' && caracter_press != last_key) 
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            desenho_pio(leds_apagados, valor_led, pio, sm, r, g, b, caracter_press); 
         }
         else if (!caracter_press)
         {
