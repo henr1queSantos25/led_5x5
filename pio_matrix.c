@@ -157,23 +157,33 @@ int main()
             last_key = caracter_press;
             tetrix(pio, sm); // função para gerar animação do leds
         }
+        
         else if (caracter_press == '4' && caracter_press != last_key) // Se caso para tecla '4'
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             seta(pio, sm); // função para gerar animação do leds
         }
+
         else if (caracter_press == '5' && caracter_press != last_key) // Se caso para tecla '5'
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             carinha(pio, sm); 
         }
+
         else if (caracter_press == '#' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             desenho_pio(valor_led, pio, sm, caracter_press);
+        }
+
+        else if (caracter_press == '*' && caracter_press != last_key)
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            reboot();
         }
 
         else if (!caracter_press)
@@ -184,12 +194,6 @@ int main()
         {
             last_key = caracter_press;
             printf("\nTecla pressionada: %c\n", caracter_press);
-        }
-        else if (caracter_press == '*' && caracter_press != last_key)
-        {
-            printf("\nTecla pressionada: %c\n", caracter_press);
-            last_key = caracter_press;
-            reboot_device();
         }
 
         sleep_ms(500);
