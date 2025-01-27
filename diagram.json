@@ -48,9 +48,16 @@
     {
       "type": "wokwi-membrane-keypad",
       "id": "keypad1",
-      "top": -366.8,
-      "left": 159.2,
+      "top": -376.4,
+      "left": 226.4,
       "attrs": {}
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": -352.8,
+      "left": 117,
+      "attrs": { "volume": "0.1" }
     }
   ],
   "connections": [
@@ -148,7 +155,9 @@
     [ "keypad1:C1", "pico:GP20", "green", [ "v0" ] ],
     [ "keypad1:C2", "pico:GP21", "green", [ "v0" ] ],
     [ "keypad1:C3", "pico:GP22", "green", [ "v0" ] ],
-    [ "keypad1:C4", "pico:GP26", "green", [ "v0" ] ]
+    [ "keypad1:C4", "pico:GP26", "green", [ "v0" ] ],
+    [ "bz1:1", "pico:GND.8", "green", [ "v28.8", "h-9.6", "v268.8" ] ],
+    [ "pico:GP28", "bz1:2", "green", [ "h0" ] ]
   ],
   "dependencies": {}
 }
