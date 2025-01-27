@@ -495,6 +495,8 @@ void tocar_buzzer(int freq, int duration_ms)
 
 void cobra_animacao(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms)
 {
+    gpio_init(BUZZER_PIN);
+    gpio_set_dir(BUZZER_PIN, GPIO_OUT);
     // Cor da cobra
     double cor_cobra[3] = {0.0, 1.0, 0.0}; 
     double cor_fundo[3] = {0.0, 0.0, 0.0}; 

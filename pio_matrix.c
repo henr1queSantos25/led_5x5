@@ -15,7 +15,6 @@
 // pino do led 5x5
 #define OUT_PIN 7
 
-#define BUZZER_PIN 28
 
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
