@@ -15,6 +15,8 @@
 // pino do led 5x5
 #define OUT_PIN 7
 
+#define BUZZER_PIN 28
+
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
 
@@ -24,6 +26,7 @@ extern void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes
 extern void tetrix(PIO pio, uint sm);
 extern void seta(PIO pio, uint sm);
 extern void carinha(PIO pio, uint sm);
+extern void cobra_animacao(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 
 // rotina para definição da intensidade de cores do led
 uint32_t matrix_rgb(double b, double r, double g)
@@ -170,6 +173,13 @@ int main()
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             carinha(pio, sm); 
+        }
+
+        else if (caracter_press == '6' && caracter_press != last_key) // Se caso para tecla '6'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            cobra_animacao(valor_led, pio, sm, 3, 150);
         }
 
         else if (caracter_press == '#' && caracter_press != last_key)
