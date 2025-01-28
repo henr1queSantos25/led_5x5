@@ -24,6 +24,8 @@ extern void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes
 extern void tetrix(PIO pio, uint sm);
 extern void seta(PIO pio, uint sm);
 
+extern void espiral_expansiva(PIO pio, uint sm);
+
 // rotina para definição da intensidade de cores do led
 uint32_t matrix_rgb(double b, double r, double g)
 {
@@ -162,6 +164,12 @@ int main()
             last_key = caracter_press;
             seta(pio, sm); // função para gerar animação do leds
         }
+        else if (caracter_press == '5' && caracter_press != last_key) // Se caso para tecla '4'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            espiral_expansiva(pio, sm); // função para gerar animação do leds
+        }
         else if (caracter_press == '#' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
@@ -182,7 +190,7 @@ int main()
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
-            reboot_device();
+            reboot();
         }
 
         sleep_ms(500);
