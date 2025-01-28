@@ -15,6 +15,7 @@
 // pino do led 5x5
 #define OUT_PIN 7
 
+
 extern void pico_keypad_init(void);
 extern char pico_keypad_get_key(void);
 
@@ -23,6 +24,8 @@ extern void animacao_olho(PIO pio, uint sm);
 extern void coracao_batendo(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 extern void tetrix(PIO pio, uint sm);
 extern void seta(PIO pio, uint sm);
+extern void carinha(PIO pio, uint sm);
+extern void cobra_animacao(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 
 extern void espiral_expansiva(PIO pio, uint sm);
 
@@ -158,18 +161,36 @@ int main()
             last_key = caracter_press;
             tetrix(pio, sm); // função para gerar animação do leds
         }
+        
         else if (caracter_press == '4' && caracter_press != last_key) // Se caso para tecla '4'
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             seta(pio, sm); // função para gerar animação do leds
         }
-        else if (caracter_press == '5' && caracter_press != last_key) // Se caso para tecla '4'
+
+
+        else if (caracter_press == '5' && caracter_press != last_key) // Se caso para tecla '5'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            carinha(pio, sm); 
+        }
+
+        else if (caracter_press == '6' && caracter_press != last_key) // Se caso para tecla '6'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            cobra_animacao(valor_led, pio, sm, 3, 150);
+        }
+      
+        else if (caracter_press == '7' && caracter_press != last_key) // Se caso para tecla '7'
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             espiral_expansiva(pio, sm); // função para gerar animação do leds
         }
+
         else if (caracter_press == '#' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
@@ -177,20 +198,22 @@ int main()
             desenho_pio(valor_led, pio, sm, caracter_press);
         }
 
-        else if (!caracter_press)
-        {
-            last_key = 0;
-        }
-        else if (caracter_press && caracter_press != last_key)
-        {
-            last_key = caracter_press;
-            printf("\nTecla pressionada: %c\n", caracter_press);
-        }
         else if (caracter_press == '*' && caracter_press != last_key)
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             reboot();
+        }
+
+        else if (!caracter_press)
+        {
+            last_key = 0;
+        }
+      
+        else if (caracter_press && caracter_press != last_key)
+        {
+            last_key = caracter_press;
+            printf("\nTecla pressionada: %c\n", caracter_press);
         }
 
         sleep_ms(500);
