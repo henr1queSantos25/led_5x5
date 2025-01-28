@@ -27,6 +27,8 @@ extern void seta(PIO pio, uint sm);
 extern void carinha(PIO pio, uint sm);
 extern void cobra_animacao(uint32_t valor_led, PIO pio, uint sm, int repeticoes, int delay_ms);
 
+extern void espiral_expansiva(PIO pio, uint sm);
+
 // rotina para definição da intensidade de cores do led
 uint32_t matrix_rgb(double b, double r, double g)
 {
@@ -167,6 +169,7 @@ int main()
             seta(pio, sm); // função para gerar animação do leds
         }
 
+
         else if (caracter_press == '5' && caracter_press != last_key) // Se caso para tecla '5'
         {
             printf("\nTecla pressionada: %c\n", caracter_press);
@@ -179,6 +182,13 @@ int main()
             printf("\nTecla pressionada: %c\n", caracter_press);
             last_key = caracter_press;
             cobra_animacao(valor_led, pio, sm, 3, 150);
+        }
+      
+        else if (caracter_press == '7' && caracter_press != last_key) // Se caso para tecla '7'
+        {
+            printf("\nTecla pressionada: %c\n", caracter_press);
+            last_key = caracter_press;
+            espiral_expansiva(pio, sm); // função para gerar animação do leds
         }
 
         else if (caracter_press == '#' && caracter_press != last_key)
@@ -199,6 +209,7 @@ int main()
         {
             last_key = 0;
         }
+      
         else if (caracter_press && caracter_press != last_key)
         {
             last_key = caracter_press;
