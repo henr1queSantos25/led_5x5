@@ -10,7 +10,7 @@ Este repositório contém exemplo de código voltado para a implementação e ut
 - Criar Animações com LED 5x5
 
 ## 📹 video do Projeto
-- **[Ver Video](https://drive.google.com/file/d/1DxSElioWo7slgMCFAZF2HxSXC77gdu5Z/view?usp=sharing)**
+- **[Ver Video](https://drive.google.com/file/d/19UoW15tsgLIdNkLL4hNLX0HyGqUpfi9I/view?usp=sharing)**
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -58,6 +58,8 @@ Este repositório contém exemplo de código voltado para a implementação e ut
 #### Tecla D. LEDs deverão ser ligados na cor verde, no nível de intensidade de 50% da luminosidade máxima.
 
 #### Tecla #. LEDs deverão ser ligados na cor branca, no nível de intensidade de 20% da luminosidade máxima.
+
+#### Tecla *. BOOTSEL.
 
 ## ✨ Funcionalidades Demonstradas
 
